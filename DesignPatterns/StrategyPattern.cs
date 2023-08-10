@@ -1,3 +1,5 @@
+// Defines a family of algorithms encapsulating each one and making each interchangable.
+
 namespace InterfacesDemo
 {
     public class Program

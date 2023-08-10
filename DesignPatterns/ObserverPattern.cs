@@ -22,6 +22,7 @@ namespace newConsole
     public interface ISubject
     {
         public int Temperature { get; set; }
+
         void Attact(IObserver observer);
 
         void Detach(IObserver observer);
@@ -32,6 +33,7 @@ namespace newConsole
     public class Subject : ISubject
     {
         public string Name {get; set;}
+
         public int Temperature {get; set;} = 20;
 
         public Subject(string name)
@@ -66,6 +68,7 @@ namespace newConsole
     public interface IObserver
     {   
         string Name {get; set;}
+        
         void Update();
     }
 

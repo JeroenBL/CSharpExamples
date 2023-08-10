@@ -8,7 +8,7 @@ namespace newConsole
         static void Main(string[] args)
         {
             var myWeatherStation = new Subject("MyWeatherStation");
-            var myThermometer = new MyObserver("MyThermometer");
+            var myThermometer = new Observer("MyThermometer");
             myWeatherStation.Attact(myThermometer);
             myWeatherStation.Notify();
 
@@ -69,11 +69,11 @@ namespace newConsole
         void Update();
     }
 
-    public class MyObserver : IObserver
+    public class Observer : IObserver
     {
         public string Name { get; set; }
 
-        public MyObserver(string name)
+        public Observer(string name)
         {
             Name = name;
         }

@@ -1,7 +1,14 @@
+// ObserverPattern.
+// A design pattern allowing an 'observer' to subscribe to something that is 'observerable'. 
+// For example: a cell broadcast alarm service. The alarm service in this case is the thing that 
+// is 'observerable'. The 'observers' are cell-phone that can subscribe (attach) to the service. They are then,
+// added to a list of subscribers (or observers). 
+// In case of an alarm, the alarm service (observerable) notifies all observers the list.
+
 using System;
 using System.Text;
 
-namespace newConsole
+namespace ObserverPattern
 {
     internal class Program
     {
@@ -88,8 +95,9 @@ namespace newConsole
     }
 }
 
-//Subject: [MyWeatherStation] attached to observer: [MyThermometer]
-//Subject: [MyWeatherStation] notifying observer: [MyThermometer]. Temperature is now: [20] degrees
-//Subject: [MyThermometer] changed state!
-//Subject: [MyWeatherStation] notifying observer: [MyThermometer]. Temperature is now: [40] degrees
-//Subject: [MyThermometer] changed state!
+// Outputs:
+// Subject: [MyWeatherStation] attached to observer: [MyThermometer]
+// Subject: [MyWeatherStation] notifying observer: [MyThermometer]. Temperature is now: [20] degrees
+// Subject: [MyThermometer] changed state!
+// Subject: [MyWeatherStation] notifying observer: [MyThermometer]. Temperature is now: [40] degrees
+// Subject: [MyThermometer] changed state!

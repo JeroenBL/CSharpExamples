@@ -112,3 +112,15 @@ namespace StategyPattern
         }
     }
 }
+
+// Outputs:
+// WildDuck (flying normal, quacking loud
+// Flying normal
+// Quacking loud
+//
+// MountainDuck (flying high, quacking loud
+// Flying high
+// Quacking loud
+//
+// RubberDuck (won't fly, squeeks)
+// Squeak

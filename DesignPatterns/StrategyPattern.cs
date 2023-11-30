@@ -4,7 +4,7 @@
 // We have created three more classes:
 //           - WildDuck     : Implementing the default behaviors from the base class.
 //           - MountainDuck : Implementing only the same quack behavior. The fly behavior differs.
-//           - ParkDuck     : Implementing the same fly behavior is the MountainDuck but uses the Quack from the base duck class.
+//           - ParkDuck     : Implementing the same fly behavior is the MountainDuck but has a different quack behavior.
 //           - RubberDuck   : Implementing different behaviors for both fly and quack.
 // In case we need to create lots of different ducks, this 'design' isn't very helpful because; the fly 
 // and quack behaviors must be overridden in a lot of cases and can be the same across ducks. So, we also end up with duplicate code.
@@ -37,10 +37,6 @@ namespace StrategyPattern
         }
 
         // Same quack behavior as Duck class.
-        public override void Quack()
-        {
-            Console.WriteLine("Quacking loud");
-        }
     }
 
     public class ParkDuck : Duck
@@ -49,6 +45,12 @@ namespace StrategyPattern
         public override void Fly()
         {
             Console.WriteLine("Flying high");
+        }
+
+        // Different quack behavior (Quacks rapidly). So we need to override that.
+        public override void Quack()
+        {
+            Console.WriteLine("Quacking rapidly");
         }
     }
 
@@ -71,28 +73,36 @@ namespace StrategyPattern
     {
         public static void Main(string[] args)
         {
+            Console.WriteLine("WildDuck (flying normal, quacking loud)");
             var wildDuck = new WildDuck();
             wildDuck.Fly();
             wildDuck.Quack();
+            Console.WriteLine("");
 
+            Console.WriteLine("MountainDuck (flying high, quacking loud)");
             var mountainDuck = new MountainDuck();
             mountainDuck.Fly();
             mountainDuck.Quack();
+            Console.WriteLine("");
 
+            Console.WriteLine("ParkDuck (flying high, quacking rapidly)");
             var parkDuck = new ParkDuck();
             parkDuck.Fly();
             parkDuck.Quack();
+            Console.WriteLine("");
 
+            Console.WriteLine("RubberDuck (Won't fly, squeeks)");
             var rubberDuck = new RubberDuck();
             rubberDuck.Fly();
             rubberDuck.Quack();
+            Console.WriteLine("");
         }
     }
 }
 
 // The solution: StrategyPattern.
 // StrategyPattern
-// Defines a family of algorithms encapsulating each one and making each interchangable.
+// Defines a family of algorithms encapsulating each one and making each interchangeable.
 // Changes behavior of a class without modifying or extending it.
 // In this case, we have a base class 'BetterDuckClass' with two methods. Fly() and Quack(). 
 // Because these are both interfaces and not concrete implementations, we can create different
@@ -140,6 +150,15 @@ namespace StategyPattern
             }
         }
 
+        // Create the concrete implementation of QuackingRapidly. Implementing the IQuack interface
+        public class QuackingRapidly : IQuackable
+        {
+            public void Quack()
+            {
+                Console.WriteLine("Quacking rapidly");
+            }
+        }
+
         // Create the concrete implementation of Squeak. Implementing the IQuack interface
         public class Squeak : IQuackable
         {
@@ -180,6 +199,7 @@ namespace StategyPattern
 
             // Create quack behaviours
             IQuackable quackingLoud = new QuackingLoud();
+            IQuackable QuackingRapidly = new QuackingRapidly();
             IQuackable squeek = new Squeak();
 
             // Create wildDuck (flying normal, quacking loud)
@@ -196,9 +216,9 @@ namespace StategyPattern
             betterMountainDuck.Quack();
             Console.WriteLine("");
 
-            // Create parkDuck (flying high, quacking loud)
-            Console.WriteLine("ParkDuck (flying high, quacking loud");
-            var betterParkDuck = new BetterDuckClass(flyingHigh, quackingLoud);
+            // Create parkDuck (flying high, quacking rapidly)
+            Console.WriteLine("ParkDuck (flying high, quacking rapidly");
+            var betterParkDuck = new BetterDuckClass(flyingHigh, QuackingRapidly);
             betterParkDuck.Fly();
             betterParkDuck.Quack();
             Console.WriteLine("");

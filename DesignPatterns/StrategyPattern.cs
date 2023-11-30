@@ -1,11 +1,14 @@
 // The 'problem'
 // In this scenario we have defined the abstract base class 'Duck' with two methods. Fly and Quack. Both implement
-// a 'default' fly and quack behavior. We have created three more classes. 
-// - WildDuck     : Implementing the default behaviors from the base class.
-// - MountainDuck : Implementing only the same quack behavior. The fly behavior differs.
-// - RubberDuck   : Implementing different behaviors for both fly and quack.
-// So, if you a large programming where you need to create lots of different ducks, this 'design' isn't very useful.
-// The fly and quack behaviors must be overriden in a lot of cases, and you could be end up with lots of code re-use.
+// a 'default' fly and quack behavior. 
+// We have created three more classes:
+//           - WildDuck     : Implementing the default behaviors from the base class.
+//           - MountainDuck : Implementing only the same quack behavior. The fly behavior differs.
+//           - ParkDuck     : Implementing the same fly behavior is the MountainDuck but uses the Quack from the base duck class.
+//           - RubberDuck   : Implementing different behaviors for both fly and quack.
+// In case we need to create lots of different ducks, this 'design' isn't very helpful because; the fly 
+// and quack behaviors must be overridden in a lot of cases and can be the same across ducks. So, we also end up with duplicate code.
+// Ultimately this will be become problematic in the sense that, this code becomes will be harder to maintain and adding new features requires more time.
 namespace StrategyPattern
 {
     public abstract class Duck
@@ -40,6 +43,15 @@ namespace StrategyPattern
         }
     }
 
+    public class ParkDuck : Duck
+    {
+        // Same fly behavior is the MountainDuck.
+        public override void Fly()
+        {
+            Console.WriteLine("Flying high");
+        }
+    }
+
     public class RubberDuck : Duck
     {
         // Different fly behavior (won't fly). So we need to override that.
@@ -66,6 +78,10 @@ namespace StrategyPattern
             var mountainDuck = new MountainDuck();
             mountainDuck.Fly();
             mountainDuck.Quack();
+
+            var parkDuck = new ParkDuck();
+            parkDuck.Fly();
+            parkDuck.Quack();
 
             var rubberDuck = new RubberDuck();
             rubberDuck.Fly();
@@ -178,6 +194,13 @@ namespace StategyPattern
             var betterMountainDuck = new BetterDuckClass(flyingHigh, quackingLoud);
             betterMountainDuck.Fly();
             betterMountainDuck.Quack();
+            Console.WriteLine("");
+
+            // Create parkDuck (flying high, quacking loud)
+            Console.WriteLine("ParkDuck (flying high, quacking loud");
+            var betterParkDuck = new BetterDuckClass(flyingHigh, quackingLoud);
+            betterParkDuck.Fly();
+            betterParkDuck.Quack();
             Console.WriteLine("");
 
             // Create rubberDuck (won't fly, squeeks)
